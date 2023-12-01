@@ -1,6 +1,8 @@
 //your variable declarations here
  Spaceship plane = new Spaceship();
  Star[] dipdots = new Star[150];
+ ArrayList <Asteroid> rocks = new ArrayList();
+ 
  boolean pressedW = false;
  boolean pressedA = false;
  boolean pressedD = false;
@@ -11,7 +13,9 @@ public void setup()
     for (int i = 0; i < dipdots.length; i++){
     dipdots[i] = new Star();
   }
-
+    for (int i = 0; i < 30; i++){
+    rocks.add(new Asteroid());
+  }
 }
 public void draw() 
 {
@@ -20,8 +24,17 @@ public void draw()
 for (int i = 0; i < dipdots.length; i++){
     dipdots[i].show();
 }
+stroke(255);
+for (int i = 0; i < rocks.size(); i++){
+  rocks.get(i).show();  
+  rocks.get(i).move();
+}
 plane.show();
 plane.move();
+for (int i=0;i<rocks.size();i++){
+if (dist(plane.getX(),plane.getY(),rocks.get(i).getX(),rocks.get(i).getY())<15)
+rocks.remove(i);
+}
 if (pressedW == true)
 plane.accelerate(0.05);
 if (pressedA == true)
