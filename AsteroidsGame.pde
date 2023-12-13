@@ -2,7 +2,7 @@
  Spaceship plane = new Spaceship();
  Star[] dipdots = new Star[150];
  ArrayList <Asteroid> rocks = new ArrayList();
- 
+ ArrayList <Bullet> shots = new ArrayList <Bullet>();
  boolean pressedW = false;
  boolean pressedA = false;
  boolean pressedD = false;
@@ -31,10 +31,37 @@ for (int i = 0; i < rocks.size(); i++){
 }
 plane.show();
 plane.move();
-for (int i=0;i<rocks.size();i++){
-if (dist(plane.getX(),plane.getY(),rocks.get(i).getX(),rocks.get(i).getY())<15)
-rocks.remove(i);
+for (int i = 0; i < shots.size(); i++){
+shots.get(i).move();
+shots.get(i).show();
 }
+for (int i=0;i< rocks.size();i++){
+float distanceone= dist(plane.getX(),plane.getY(),rocks.get(i).getX(),rocks.get(i).getY());
+  if (distanceone<15){
+rocks.remove(i);
+  }
+for (int j = 0; j <shots.size() ;j++){
+float distance = dist(shots.get(j).getX(),shots.get(j).getY(),rocks.get(i).getX(),rocks.get(i).getY());
+  if (distance<15){
+rocks.remove(i);
+shots.remove(j);
+j--;
+break;
+  }
+}
+}
+for (int i = 0; i < shots.size(); i++){
+   if (shots.get(i).getX()==500||shots.get(i).getY()==500||shots.get(i).getY()==0 || shots.get(i).getX()==0){
+  shots.remove(i);
+  break;
+} 
+}
+if (rocks.size()==0){
+for (int i = 0; i <30; i++)
+  rocks.add(new Asteroid());
+}
+
+
 if (pressedW == true)
 plane.accelerate(0.05);
 if (pressedA == true)
@@ -73,5 +100,8 @@ public void keyReleased(){
   }
     if(key == 'a'){
     pressedA = false;
+  }
+     if (key == ' '){
+  shots.add(new Bullet(plane));
   }
 }
