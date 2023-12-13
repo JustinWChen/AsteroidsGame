@@ -42,7 +42,7 @@ rocks.remove(i);
   }
 for (int j = 0; j <shots.size() ;j++){
 float distance = dist(shots.get(j).getX(),shots.get(j).getY(),rocks.get(i).getX(),rocks.get(i).getY());
-  if (distance<15){
+  if (distance<14){
 rocks.remove(i);
 shots.remove(j);
 j--;
