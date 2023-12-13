@@ -63,7 +63,7 @@ for (int i = 0; i <30; i++)
 
 
 if (pressedW == true)
-plane.accelerate(0.05);
+plane.accelerate(0.03);
 if (pressedA == true)
 plane.turn(-3);
 if (pressedD == true)
